@@ -1,0 +1,111 @@
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\GTI780_TP1.exe.config
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\MainWindow.baml
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\MainWindow.g.cs
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\App.g.cs
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\GTI780_TP1_Content.g.cs
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\GTI780_TP1_MarkupCompile.cache
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\GTI780_TP1.g.resources
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\GTI780_TP1.Properties.Resources.resources
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\GTI780_TP1.csproj.GenerateResource.Cache
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\GTI780_TP1.exe
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\GTI780_TP1.pdb
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\Emgu.CV.DebuggerVisualizers.VS2015.dll
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\Emgu.CV.UI.dll
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\Emgu.CV.UI.GL.dll
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\Emgu.CV.World.dll
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\Microsoft.Kinect.dll
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\Microsoft.VisualStudio.DebuggerVisualizers.dll
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\ZedGraph.dll
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\Emgu.CV.UI.xml
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\Emgu.CV.UI.GL.xml
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\Emgu.CV.World.xml
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\Microsoft.Kinect.xml
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\fr\Microsoft.VisualStudio.DebuggerVisualizers.resources.dll
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\GTI780_TP1.exe
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\GTI780_TP1.pdb
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\ZedGraph.xml
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\bin\Release\zh-CN\ZedGraph.resources.dll
+C:\Users\test\Downloads\GTI780_TP1_VersionFonctionnelle-2016-04-12\GTI780_TP1_VersionFonctionnelle\GTI780_TP1\obj\Release\GTI780_TP1.csprojResolveAssemblyReference.cache
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\GTI780_TP1.exe.config
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.exe
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.pdb
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\GTI780_TP1.exe
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\GTI780_TP1.pdb
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.DebuggerVisualizers.VS2015.dll
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.UI.dll
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.UI.GL.dll
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.World.dll
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Microsoft.Kinect.dll
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Microsoft.VisualStudio.DebuggerVisualizers.dll
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\ZedGraph.dll
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.UI.xml
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.UI.GL.xml
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.World.xml
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Microsoft.Kinect.xml
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\ZedGraph.xml
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\fr\Microsoft.VisualStudio.DebuggerVisualizers.resources.dll
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\zh-CN\ZedGraph.resources.dll
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\MainWindow.baml
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\MainWindow.g.cs
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\App.g.cs
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1_Content.g.cs
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1_MarkupCompile.cache
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.g.resources
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.Properties.Resources.resources
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.csproj.GenerateResource.Cache
+C:\Users\test\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.csprojResolveAssemblyReference.cache
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\GTI780_TP1.exe.config
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.exe
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.pdb
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\GTI780_TP1.exe
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\GTI780_TP1.pdb
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.DebuggerVisualizers.VS2015.dll
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.UI.dll
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.UI.GL.dll
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.World.dll
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Microsoft.Kinect.dll
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Microsoft.VisualStudio.DebuggerVisualizers.dll
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\ZedGraph.dll
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.UI.xml
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.UI.GL.xml
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.World.xml
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Microsoft.Kinect.xml
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\ZedGraph.xml
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\fr\Microsoft.VisualStudio.DebuggerVisualizers.resources.dll
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\zh-CN\ZedGraph.resources.dll
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.csprojResolveAssemblyReference.cache
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\MainWindow.baml
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\MainWindow.g.cs
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\App.g.cs
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1_Content.g.cs
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1_MarkupCompile.cache
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.g.resources
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.Properties.Resources.resources
+C:\Users\test\Desktop\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.csproj.GenerateResource.Cache
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\GTI780_TP1.exe.config
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.exe
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.pdb
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\GTI780_TP1.exe
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\GTI780_TP1.pdb
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Microsoft.Kinect.dll
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Microsoft.VisualStudio.DebuggerVisualizers.dll
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\ZedGraph.dll
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.UI.xml
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.UI.GL.xml
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Emgu.CV.World.xml
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\Microsoft.Kinect.xml
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\ZedGraph.xml
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\fr\Microsoft.VisualStudio.DebuggerVisualizers.resources.dll
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\bin\Release\zh-CN\ZedGraph.resources.dll
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.csprojResolveAssemblyReference.cache
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\MainWindow.baml
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\MainWindow.g.cs
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\App.g.cs
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1_Content.g.cs
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1_MarkupCompile.cache
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.g.resources
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.Properties.Resources.resources
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce\GTI780_TP1\obj\Release\GTI780_TP1.csproj.GenerateResource.Cache
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce - Copie\GTI780_TP1\bin\Release\GTI780_TP1.exe.config
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce - Copie\GTI780_TP1\obj\Release\GTI780_TP1.exe
+D:\Users\an02140\Downloads\GTI-780 laboratoires 3D\GTI-780 laboratoires 3D\Laboratoire 1\GTI780_TP1_Version_Ennonce - Copie\GTI780_TP1\obj\Release\GTI780_TP1.pdb
