@@ -45,7 +45,6 @@ namespace GTI780_TP1
         private int BYTESPERPIXELS = (PixelFormats.Bgr32.BitsPerPixel + 7) / 8;
 
 
-
         // Size of the target display screen
         private double screenWidth;
         private double screenHeight;
@@ -56,13 +55,13 @@ namespace GTI780_TP1
 
 
         // The kinect sensor
-
         private KinectSensor kinectSensor = null;
 
 
         // The kinect frame reader
-
+        private MultiSourceFrameReader multiSourceFrameReader = null;
         private ColorFrameReader colorFrameReader = null;
+        private DepthFrameReader depthFrameReader = null;
 
 
 
@@ -81,11 +80,16 @@ namespace GTI780_TP1
             this.kinectSensor = KinectSensor.GetDefault();
 
             // open the reader for the color frames
-            this.colorFrameReader = this.kinectSensor.ColorFrameSource.OpenReader();
+            //Faire un "ou" pour les FrameSourceType?
+            this.multiSourceFrameReader = this.kinectSensor.OpenMultiSourceFrameReader(FrameSourceTypes.Color | FrameSourceTypes.Depth);
+            //this.colorFrameReader = this.kinectSensor.ColorFrameSource.OpenReader();
+            //this.depthFrameReader = this.kinectSensor.DepthFrameSource.OpenReader();
+        
 
 
             // wire handler for frame arrival
-            this.colorFrameReader.FrameArrived += this.Reader_FrameArrived;
+            //this.colorFrameReader.FrameArrived += this.Reader_FrameArrived;
+            this.multiSourceFrameReader.MultiSourceFrameArrived += this.Reader_FrameArrived;
 
 
             // Open the kinect sensor
@@ -101,8 +105,12 @@ namespace GTI780_TP1
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">args of the event</param>
-        void Reader_FrameArrived(object sender, ColorFrameArrivedEventArgs e)
+        void Reader_FrameArrived(object sender, MultiSourceFrameArrivedEventArgs e)
         {
+      
+           int depthHeight = 0;
+           int depthWidth = 0;
+
             // Store the depth and the color frame
             DepthFrame depthFrame = null;
             ColorFrame colorFrame = null;
@@ -112,10 +120,14 @@ namespace GTI780_TP1
             bool isDepthBitmapLocked = false;
 
             // Acquire a new frame
-            colorFrame = e.FrameReference.AcquireFrame();
+            //colorFrame = e.FrameReference.AcquireFrame();
+            MultiSourceFrame multiSourceFrame = e.FrameReference.AcquireFrame();
+
+            depthFrame = multiSourceFrame.DepthFrameReference.AcquireFrame();
+            colorFrame = multiSourceFrame.ColorFrameReference.AcquireFrame();
 
             // If the frame has expired or is invalid, return
-            if (colorFrame == null) return;
+            if (multiSourceFrame == null) return;
 
             // Using a try/finally structure allows us to liberate/dispose of the elements even if there was an error
             try
@@ -148,17 +160,19 @@ namespace GTI780_TP1
                     this.colorBitmap.Unlock();
                     isColorBitmapLocked = false;
                 }
-              
+
 
 
                 // ================================================================
                 // DepthFrame code block : À modifier et completer 
                 // Remarque : Beaucoup de code à modifer/ajouter dans cette partie
                 // ================================================================
+                FrameDescription depthDesc = depthFrame.FrameDescription;
+                //depthWidth = depthDesc.Width;
+                //depthHeight = depthDesc.Height;
 
 
-
-                using (KinectBuffer depthBuffer = colorFrame.LockRawImageBuffer())
+                using (KinectBuffer depthBuffer = depthFrame.LockImageBuffer())
                 {
                     // Lock the depthBitmap while we write in it.
                     this.depthBitmap.Lock();
@@ -183,7 +197,7 @@ namespace GTI780_TP1
                     //---------------------------------------------------------------------------------------------------------
                     if (colorDesc.Width == this.colorBitmap.Width && colorDesc.Height == this.colorBitmap.Height)
                     {
-                        colorFrame.CopyConvertedFrameDataToIntPtr(this.depthBitmap.BackBuffer, (uint)(colorDesc.Width * colorDesc.Height * BYTESPERPIXELS), ColorImageFormat.Bgra);
+                       colorFrame.CopyConvertedFrameDataToIntPtr(this.depthBitmap.BackBuffer, (uint)(colorDesc.Width * colorDesc.Height * BYTESPERPIXELS), ColorImageFormat.Bgra);
 
                         // Mark the entire buffer as dirty to refresh the display
                         this.depthBitmap.AddDirtyRect(new Int32Rect(0, 0, colorDesc.Width, colorDesc.Height));
@@ -198,7 +212,7 @@ namespace GTI780_TP1
 
 
                 // We are done with the depthFrame, dispose of it
-                // depthFrame.Dispose();
+                depthFrame.Dispose();
                 depthFrame = null;
                 // We are done with the ColorFrame, dispose of it
                 colorFrame.Dispose();
