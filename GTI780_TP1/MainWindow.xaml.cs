@@ -28,22 +28,10 @@ using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 namespace GTI780_TP1
 {
-    /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        // Size of the raw depth stream
-        private const int RAWDEPTHWIDTH = 512;
-        private const int RAWDEPTHHEIGHT = 424;
-
-        // Size of the raw color stream
-        private const int RAWCOLORWIDTH = 1920;
-        private const int RAWCOLORHEIGHT = 1080;
-
         // Number of bytes per pixel for the format used in this project
         private int BYTESPERPIXELS = (PixelFormats.Bgr32.BitsPerPixel + 7) / 8;
-
 
         // Size of the target display screen
         private double screenWidth;
@@ -52,188 +40,222 @@ namespace GTI780_TP1
         // Bitmaps to display
         private WriteableBitmap colorBitmap = null;
         private WriteableBitmap depthBitmap = null;
+        //private WriteableBitmap headerBitmap = null;
 
-
-        // The kinect sensor
+        // Kinect Sensor
         private KinectSensor kinectSensor = null;
 
-
-        // The kinect frame reader
+        // Frame Reader
         private MultiSourceFrameReader multiSourceFrameReader = null;
-        private ColorFrameReader colorFrameReader = null;
-        private DepthFrameReader depthFrameReader = null;
+
+        // CoordinateMapper
+        private CoordinateMapper coordinateMapper = null;
+
+        // Mapping de la couleur vers la profondeur
+        private DepthSpacePoint[] mapColorToDepth = null;
+
+        private int bitmapBackBufferSize = 0;
+
+        private int depthToBytes = 8000 / 256;
+
+        private int depthPixelWidth = 0;
+        private int depthPixelHeight = 0;
+
 
 
 
         public MainWindow()
         {
+            //Initialize UI
             InitializeComponent();
 
-            // Sets the correct size to the display components
+            //Sets the correct size to the display components
             InitializeComponentsSize();
 
-            // Instanciate the WriteableBitmaps used to display the kinect frames
-            this.colorBitmap = new WriteableBitmap(RAWCOLORWIDTH, RAWCOLORHEIGHT, 96.0, 96.0, PixelFormats.Bgr32, null);
-            this.depthBitmap = new WriteableBitmap(RAWCOLORWIDTH, RAWCOLORHEIGHT, 96.0, 96.0, PixelFormats.Bgr32, null);
-
-            // Connect to the Kinect Sensor
+            //Connect to sensor
             this.kinectSensor = KinectSensor.GetDefault();
 
-            // open the reader for the color frames
-            //Faire un "ou" pour les FrameSourceType?
-            this.multiSourceFrameReader = this.kinectSensor.OpenMultiSourceFrameReader(FrameSourceTypes.Color | FrameSourceTypes.Depth);
-            //this.colorFrameReader = this.kinectSensor.ColorFrameSource.OpenReader();
-            //this.depthFrameReader = this.kinectSensor.DepthFrameSource.OpenReader();
-        
+            //CoordinateMapper
+            this.coordinateMapper = this.kinectSensor.CoordinateMapper;
 
+            //Open reader for multiframes
+            this.multiSourceFrameReader = this.kinectSensor.OpenMultiSourceFrameReader(FrameSourceTypes.Depth | FrameSourceTypes.Color);
 
-            // wire handler for frame arrival
-            //this.colorFrameReader.FrameArrived += this.Reader_FrameArrived;
+            //For the color to depth mapping
+            int colorWidth = this.kinectSensor.ColorFrameSource.FrameDescription.Width;
+            int colorHeight = this.kinectSensor.ColorFrameSource.FrameDescription.Height;
+            this.mapColorToDepth = new DepthSpacePoint[colorWidth * colorHeight];
+
+            //Instanciate the WriteableBitmaps used to display the kinect frames
+            this.colorBitmap = new WriteableBitmap(colorWidth, colorHeight, 96.0, 96.0, PixelFormats.Bgra32, null);
+            this.depthBitmap = new WriteableBitmap(colorWidth, colorHeight, 96.0, 96.0, PixelFormats.Gray8, null);
+
+            // Calculate the WriteableBitmap back buffer size
+            this.bitmapBackBufferSize = ((this.colorBitmap.BackBufferStride * (this.colorBitmap.PixelHeight - 1)) + (this.colorBitmap.PixelWidth * this.BYTESPERPIXELS));
+
+            //Handle the arrival of a frame
             this.multiSourceFrameReader.MultiSourceFrameArrived += this.Reader_FrameArrived;
 
-
-            // Open the kinect sensor
+            //Open the kinect sensor
             this.kinectSensor.Open();
 
-
-            // Sets the context for the data binding
+            //Sets the context for the data binding
             this.DataContext = this;
+
         }
 
-        /// <summary>
-        /// This event will be called whenever the color Frame Reader receives a new frame
-        /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">args of the event</param>
+
+
+
+        // This event will be called whenever the multi Frame Reader receives a new frame
         void Reader_FrameArrived(object sender, MultiSourceFrameArrivedEventArgs e)
         {
-      
-           int depthHeight = 0;
-           int depthWidth = 0;
-
-            // Store the depth and the color frame
-            DepthFrame depthFrame = null;
+            //Store the depth and the color frame 
             ColorFrame colorFrame = null;
+            DepthFrame depthFrame = null;
 
-            // Store the state of the frame lock
-            bool isColorBitmapLocked = false;
-            bool isDepthBitmapLocked = false;
+            //Store the state of the frame lock
+            bool isLocked = false;
 
-            // Acquire a new frame
-            //colorFrame = e.FrameReference.AcquireFrame();
+            //Acquire a new frame
             MultiSourceFrame multiSourceFrame = e.FrameReference.AcquireFrame();
 
-            depthFrame = multiSourceFrame.DepthFrameReference.AcquireFrame();
-            colorFrame = multiSourceFrame.ColorFrameReference.AcquireFrame();
+            //If the Frame has expired or is invalid, return
+            if (multiSourceFrame == null) { return; }
 
-            // If the frame has expired or is invalid, return
-            if (multiSourceFrame == null) return;
-
-            // Using a try/finally structure allows us to liberate/dispose of the elements even if there was an error
             try
             {
 
+                depthFrame = multiSourceFrame.DepthFrameReference.AcquireFrame();
 
-                // ===============================
-                // ColorFrame code block
-                // ===============================   
+                // If the frames have expired or are invalid, return.
+                if (depthFrame == null) { return; }
 
-                FrameDescription colorDesc = colorFrame.FrameDescription;
-                // Using an IDisposable buffer to work with the color frame. Will be disposed automatically at the end of the using block.
-                using (KinectBuffer colorBuffer = colorFrame.LockRawImageBuffer())
+                /**
+                 * 
+                 * ********Depth*********
+                 * 
+                 **/
+
+                depthPixelHeight = this.depthBitmap.PixelHeight;
+                depthPixelWidth = this.depthBitmap.PixelWidth;
+
+                int depthHeight = depthFrame.FrameDescription.Height;
+                int depthWidth = depthFrame.FrameDescription.Width;
+                ushort depthMinDistance = depthFrame.DepthMinReliableDistance;
+
+                ushort[] frameArrayData = new ushort[depthFrame.FrameDescription.Width * depthFrame.FrameDescription.Height];
+                depthFrame.CopyFrameDataToArray(frameArrayData);
+
+                //Map the frame from color space to depth space using data from the buffer
+                //Using kinectbuffer to get underlying buffer data
+                using (KinectBuffer data = depthFrame.LockImageBuffer())
                 {
-                    // Lock the colorBitmap while we write in it.
-                    this.colorBitmap.Lock();
-                    isColorBitmapLocked = true;
-
-                    // Check for correct size
-                    if (colorDesc.Width == this.colorBitmap.Width && colorDesc.Height == this.colorBitmap.Height)
-                    {
-                        //write the new color frame data to the display bitmap
-                        colorFrame.CopyConvertedFrameDataToIntPtr(this.colorBitmap.BackBuffer, (uint)(colorDesc.Width * colorDesc.Height * BYTESPERPIXELS), ColorImageFormat.Bgra);
-
-                        // Mark the entire buffer as dirty to refresh the display
-                        this.colorBitmap.AddDirtyRect(new Int32Rect(0, 0, colorDesc.Width, colorDesc.Height));
-                    }
-
-                    // Unlock the colorBitmap
-                    this.colorBitmap.Unlock();
-                    isColorBitmapLocked = false;
+                    this.coordinateMapper.MapColorFrameToDepthSpaceUsingIntPtr(data.UnderlyingBuffer,data.Size,this.mapColorToDepth);
                 }
-
-
-
-                // ================================================================
-                // DepthFrame code block : À modifier et completer 
-                // Remarque : Beaucoup de code à modifer/ajouter dans cette partie
-                // ================================================================
-                FrameDescription depthDesc = depthFrame.FrameDescription;
-                //depthWidth = depthDesc.Width;
-                //depthHeight = depthDesc.Height;
-
-
-                using (KinectBuffer depthBuffer = depthFrame.LockImageBuffer())
-                {
-                    // Lock the depthBitmap while we write in it.
-                    this.depthBitmap.Lock();
-                    isDepthBitmapLocked = true;
-
-                    //-----------------------------------------------------------
-                    // Effectuer la correspondance espace Profondeur---Couleur 
-                    //-----------------------------------------------------------
-                    //  Utiliser la ligne ci-dessous pour l'image de profondeur
-                    Image<Gray, byte> depthImageGray = new Image<Gray, byte>(RAWCOLORWIDTH, RAWCOLORHEIGHT);
-
-                    //-----------------------------------------------------------
-                    // Traiter l'image de profondeur 
-                    //-----------------------------------------------------------
-
-
-                    // Une fois traitée convertir l'image en Bgra
-                    Image<Bgra, byte> depthImageBgra = depthImageGray.Convert<Bgra, byte>();
-
-                    //---------------------------------------------------------------------------------------------------------
-                    //  Modifier le code pour que depthBitmap contienne depthImageBgra au lieu du contenu trame couleur actuel
-                    //---------------------------------------------------------------------------------------------------------
-                    if (colorDesc.Width == this.colorBitmap.Width && colorDesc.Height == this.colorBitmap.Height)
-                    {
-                       colorFrame.CopyConvertedFrameDataToIntPtr(this.depthBitmap.BackBuffer, (uint)(colorDesc.Width * colorDesc.Height * BYTESPERPIXELS), ColorImageFormat.Bgra);
-
-                        // Mark the entire buffer as dirty to refresh the display
-                        this.depthBitmap.AddDirtyRect(new Int32Rect(0, 0, colorDesc.Width, colorDesc.Height));
-                    }
-
-
-
-                    // Unlock the colorBitmap
-                    this.depthBitmap.Unlock();
-                    isDepthBitmapLocked = false;
-                }
-
 
                 // We are done with the depthFrame, dispose of it
                 depthFrame.Dispose();
                 depthFrame = null;
-                // We are done with the ColorFrame, dispose of it
+
+
+                /**
+                 * 
+                 * ********Color******
+                 * 
+                 **/
+
+                colorFrame = multiSourceFrame.ColorFrameReference.AcquireFrame();
+
+                // If the frames have expired or are invalid, return.
+                if (colorFrame == null) { return; }
+
+                int colorHeight = colorFrame.FrameDescription.Height;
+                int colorWidth = colorFrame.FrameDescription.Width;
+
+                // Lock the colorBitmap while we write in it.
+                this.colorBitmap.Lock();
+                isLocked = true;
+
+                // Check for correct size
+                if (colorWidth == this.colorBitmap.Width && colorHeight == this.colorBitmap.Height)
+                {
+                    //write the new color frame data to the display bitmap
+                    colorFrame.CopyConvertedFrameDataToIntPtr(this.colorBitmap.BackBuffer, (uint)this.bitmapBackBufferSize, ColorImageFormat.Bgra);
+                }
+
+                // We are done with the colorFrame, dispose of it
                 colorFrame.Dispose();
                 colorFrame = null;
 
-                // ===============================
-                // ===============================
 
 
+                /**
+                 * To check this part.
+                 */
 
+
+                //new 1920 x 1080 depth array
+                byte[] depthPixelArray = new byte[(int)this.colorBitmap.Width * (int)this.colorBitmap.Height];
+
+
+                //Les pointeurs et les mémoires tampons de taille fixe ne peuvent être utilisés que dans un contexte unsafe
+                unsafe
+                {
+                    fixed (DepthSpacePoint* colorMappedToDepthPointsPointer = this.mapColorToDepth)
+                    {
+                        // Treat the color data as 4-byte pixels
+                        uint* bitmapPixelsPointer = (uint*)this.colorBitmap.BackBuffer;
+
+                        // Loop over each row and column of the color image
+                        // Zero out any pixels that don't correspond to a body index
+                        for (int colorIndex = 0; colorIndex < this.mapColorToDepth.Length; ++colorIndex)
+                        {
+                            float colorMappedToDepthX = colorMappedToDepthPointsPointer[colorIndex].X;
+                            float colorMappedToDepthY = colorMappedToDepthPointsPointer[colorIndex].Y;
+
+                            // The sentinel value is -inf, -inf, meaning that no depth pixel corresponds to this color pixel.
+                            if (!float.IsNegativeInfinity(colorMappedToDepthX) &&
+                                !float.IsNegativeInfinity(colorMappedToDepthY))
+                            {
+                                // Make sure the depth pixel maps to valid point in color space
+                                int depthX = (int)(colorMappedToDepthX + 0.5f);
+                                int depthY = (int)(colorMappedToDepthY + 0.5f);
+
+                                // If the point isnt valid, no body index.
+                                if ((depthX >= 0) && (depthX < depthWidth) && (depthY >= 0) && (depthY < depthHeight))
+                                {
+                                    int depthIndex = (depthY * depthWidth) + depthX;
+                                    ushort depth = frameArrayData[depthIndex];
+                                    depthPixelArray[colorIndex] = (byte)(depth >= depthMinDistance && depth <= ushort.MaxValue ? (depth / depthToBytes) : 0);
+                                }
+                            }
+                        }
+                        //this.AddHeader(this.colorBitmap);
+
+                        this.colorBitmap.AddDirtyRect(new Int32Rect(0, 0, this.colorBitmap.PixelWidth, this.colorBitmap.PixelHeight));
+
+                        this.depthBitmap.WritePixels(new Int32Rect(0, 0, depthPixelWidth, depthPixelHeight), depthPixelArray, depthPixelWidth,0);
+
+                    }
+                }
             }
             finally
             {
-                if (isColorBitmapLocked) this.colorBitmap.Unlock();
-                if (isDepthBitmapLocked) this.depthBitmap.Unlock();
-                if (depthFrame != null) depthFrame.Dispose();
-                if (colorFrame != null) colorFrame.Dispose();
+                if (isLocked)
+                {
+                    this.colorBitmap.Unlock();
+                }
+                if (depthFrame != null)
+                {
+                    depthFrame.Dispose();
+                }
+                if (colorFrame != null)
+                {
+                    colorFrame.Dispose();
+                }
             }
-        }
-
-
+        } //END Reader_FrameArrived()
 
         public ImageSource ImageSource1
         {
@@ -280,10 +302,10 @@ namespace GTI780_TP1
 
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
-            if (this.colorFrameReader != null)
+            if (this.multiSourceFrameReader != null)
             {
-                this.colorFrameReader.Dispose();
-                this.colorFrameReader = null;
+                this.multiSourceFrameReader.Dispose();
+                this.multiSourceFrameReader = null;
             }
 
             if (this.kinectSensor != null)

@@ -183,8 +183,6 @@ D:\Users\an02140\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1_Projet_de_base\
 D:\Users\an02140\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1_Projet_de_base\GTI780_TP1\obj\Debug\GTI780_TP1.exe
 D:\Users\an02140\Downloads\GTI780_TP1_Version_Ennonce\GTI780_TP1_Projet_de_base\GTI780_TP1\obj\Debug\GTI780_TP1.pdb
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\bin\Debug\GTI780_TP1.exe.config
-C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.exe
-C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.pdb
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\bin\Debug\GTI780_TP1.exe
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\bin\Debug\GTI780_TP1.pdb
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\bin\Debug\Emgu.CV.DebuggerVisualizers.VS2015.dll
@@ -196,7 +194,6 @@ C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\bin\Debug\Microsoft.VisualStudio.D
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\bin\Debug\Microsoft.Kinect.xml
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\bin\Debug\Microsoft.VisualStudio.DebuggerVisualizers.xml
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\bin\Debug\fr\Microsoft.VisualStudio.DebuggerVisualizers.resources.dll
-C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.csprojResolveAssemblyReference.cache
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\MainWindow.baml
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\MainWindow.g.cs
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\App.g.cs
@@ -205,3 +202,5 @@ C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1_MarkupCompile
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.g.resources
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.Properties.Resources.resources
 C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.csproj.GenerateResource.Cache
+C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.exe
+C:\Users\ak57370\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.pdb
