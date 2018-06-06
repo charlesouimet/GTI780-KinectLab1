@@ -117,6 +117,9 @@ namespace GTI780_TP1
             ColorFrame colorFrame = null;
             DepthFrame depthFrame = null;
 
+            //new 1920 x 1080 depth array
+            byte[] depthPixelArray = new byte[1920 * 1080];
+
             //Store the state of the frame lock
             bool isLocked = false;
 
@@ -154,8 +157,11 @@ namespace GTI780_TP1
                 //Using kinectbuffer to get underlying buffer data
                 using (KinectBuffer data = depthFrame.LockImageBuffer())
                 {
-                    this.coordinateMapper.MapColorFrameToDepthSpaceUsingIntPtr(data.UnderlyingBuffer,data.Size,this.mapColorToDepth);
+                    this.coordinateMapper.MapColorFrameToDepthSpaceUsingIntPtr(data.UnderlyingBuffer, data.Size, this.mapColorToDepth);
                 }
+
+                depthFrame.CopyFrameDataToArray(frameArrayData);
+                ProcessDepth(depthWidth, depthHeight, frameArrayData, depthPixelArray, depthMinDistance);
 
                 // We are done with the depthFrame, dispose of it
                 depthFrame.Dispose();
@@ -185,58 +191,12 @@ namespace GTI780_TP1
                 {
                     //write the new color frame data to the display bitmap
                     colorFrame.CopyConvertedFrameDataToIntPtr(this.colorBitmap.BackBuffer, (uint)this.bitmapBackBufferSize, ColorImageFormat.Bgra);
+                    this.colorBitmap.AddDirtyRect(new Int32Rect(0, 0, this.colorBitmap.PixelWidth, this.colorBitmap.PixelHeight));
                 }
 
                 // We are done with the colorFrame, dispose of it
                 colorFrame.Dispose();
                 colorFrame = null;
-
-
-
-
-
-                //new 1920 x 1080 depth array
-                byte[] depthPixelArray = new byte[1920 * 1080];
-
-
-                //Les pointeurs et les mémoires tampons de taille fixe ne peuvent être utilisés que dans un contexte unsafe
-                unsafe
-                {
-                    fixed (DepthSpacePoint* colorMappedToDepthPoint = this.mapColorToDepth)
-                    {
-                        // Treat the color data as 4-byte pixels
-                        uint* bitmapPixelsPointer = (uint*)this.colorBitmap.BackBuffer;
-
-                        for (int colorIndex = 0; colorIndex < this.mapColorToDepth.Length; ++colorIndex)
-                        {
-                            float colorMappedToDepthX = colorMappedToDepthPoint[colorIndex].X;
-                            float colorMappedToDepthY = colorMappedToDepthPoint[colorIndex].Y;
-
-                            // The sentinel value is -inf, -inf, meaning that no depth pixel corresponds to this color pixel.
-                            if (!float.IsNegativeInfinity(colorMappedToDepthX) &&
-                                !float.IsNegativeInfinity(colorMappedToDepthY))
-                            {
-                                // Make sure the depth pixel maps to valid point in color space
-                                int depthX = (int)(colorMappedToDepthX + 0.5f);
-                                int depthY = (int)(colorMappedToDepthY + 0.5f);
-
-                                // If the point isnt valid, no body index.
-                                if ((depthX >= 0) && (depthX < depthWidth) && (depthY >= 0) && (depthY < depthHeight))
-                                {
-                                    int depthIndex = (depthY * depthWidth) + depthX;
-                                    ushort depth = frameArrayData[depthIndex];
-                                    depthPixelArray[colorIndex] = (byte)(depth >= depthMinDistance && depth <= ushort.MaxValue ? (depth / depthToBytes) : 0);
-                                }
-                            }
-                        }
-                        //this.AddHeader(this.colorBitmap);
-
-                        this.colorBitmap.AddDirtyRect(new Int32Rect(0, 0, this.colorBitmap.PixelWidth, this.colorBitmap.PixelHeight));
-
-                        this.depthBitmap.WritePixels(new Int32Rect(0, 0, depthPixelWidth, depthPixelHeight), depthPixelArray, depthPixelWidth,0);
-
-                    }
-                }
             }
             finally
             {
@@ -254,11 +214,48 @@ namespace GTI780_TP1
                 }
             }
 
-            insertHeader();
+            AddEntete();
         } //END Reader_FrameArrived()
 
 
-        private void insertHeader()
+        //Les pointeurs et les mémoires tampons de taille fixe ne peuvent être utilisés que dans un contexte unsafe
+        private unsafe void ProcessDepth(int width, int height, ushort[] frameArrayData, byte[] depthPixelArray, ushort depthMinDistance)
+        {
+            fixed (DepthSpacePoint* colorMappedToDepthPoint = this.mapColorToDepth)
+            {
+                // Treat the color data as 4-byte pixels
+                uint* bitmapPixelsPointer = (uint*)this.colorBitmap.BackBuffer;
+
+                for (int colorIndex = 0; colorIndex < this.mapColorToDepth.Length; ++colorIndex)
+                {
+                    float colorMappedToDepthX = colorMappedToDepthPoint[colorIndex].X;
+                    float colorMappedToDepthY = colorMappedToDepthPoint[colorIndex].Y;
+
+                    // The sentinel value is -inf, -inf, meaning that no depth pixel corresponds to this color pixel.
+                    if (!float.IsNegativeInfinity(colorMappedToDepthX) &&
+                        !float.IsNegativeInfinity(colorMappedToDepthY))
+                    {
+                        // Make sure the depth pixel maps to valid point in color space
+                        int depthX = (int)(colorMappedToDepthX + 0.5f);
+                        int depthY = (int)(colorMappedToDepthY + 0.5f);
+
+  
+                        if ((depthX >= 0) && (depthX < width) && (depthY >= 0) && (depthY < height))
+                        {
+                            int depthIndex = (depthY * width) + depthX;
+                            ushort depth = frameArrayData[depthIndex];
+                            depthPixelArray[colorIndex] = (byte)(depth >= depthMinDistance && depth <= ushort.MaxValue ? (depth / depthToBytes) : 0);
+                        }
+                    }
+                }
+                //this.AddHeader(this.colorBitmap);
+                this.depthBitmap.WritePixels(new Int32Rect(0, 0, depthPixelWidth, depthPixelHeight), depthPixelArray, depthPixelWidth, 0);
+            }
+        }
+
+
+
+        private void AddEntete()
         {
             byte[] bytes = hex.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
 
