@@ -54,14 +54,17 @@ namespace GTI780_TP1
         // Mapping de la couleur vers la profondeur
         private DepthSpacePoint[] mapColorToDepth = null;
 
+        //Taille du bitmap backbuffer
         private int bitmapBackBufferSize = 0;
 
+        //Mapping du range de profondeur vers le range de couleur
         private int depthToBytes = 8000 / 256;
 
         private int depthPixelWidth = 0;
         private int depthPixelHeight = 0;
 
-
+        private const string hex = "F1 01 40 80 00 00 C4 2D D3 AF F2 14 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 36 95 82 21";
+        Bitmap headerBitmap = new Bitmap(512, 1);
 
 
         public MainWindow()
@@ -144,7 +147,7 @@ namespace GTI780_TP1
                 int depthWidth = depthFrame.FrameDescription.Width;
                 ushort depthMinDistance = depthFrame.DepthMinReliableDistance;
 
-                ushort[] frameArrayData = new ushort[depthFrame.FrameDescription.Width * depthFrame.FrameDescription.Height];
+                ushort[] frameArrayData = new ushort[512 * 424];
                 depthFrame.CopyFrameDataToArray(frameArrayData);
 
                 //Map the frame from color space to depth space using data from the buffer
@@ -190,29 +193,24 @@ namespace GTI780_TP1
 
 
 
-                /**
-                 * To check this part.
-                 */
 
 
                 //new 1920 x 1080 depth array
-                byte[] depthPixelArray = new byte[(int)this.colorBitmap.Width * (int)this.colorBitmap.Height];
+                byte[] depthPixelArray = new byte[1920 * 1080];
 
 
                 //Les pointeurs et les mémoires tampons de taille fixe ne peuvent être utilisés que dans un contexte unsafe
                 unsafe
                 {
-                    fixed (DepthSpacePoint* colorMappedToDepthPointsPointer = this.mapColorToDepth)
+                    fixed (DepthSpacePoint* colorMappedToDepthPoint = this.mapColorToDepth)
                     {
                         // Treat the color data as 4-byte pixels
                         uint* bitmapPixelsPointer = (uint*)this.colorBitmap.BackBuffer;
 
-                        // Loop over each row and column of the color image
-                        // Zero out any pixels that don't correspond to a body index
                         for (int colorIndex = 0; colorIndex < this.mapColorToDepth.Length; ++colorIndex)
                         {
-                            float colorMappedToDepthX = colorMappedToDepthPointsPointer[colorIndex].X;
-                            float colorMappedToDepthY = colorMappedToDepthPointsPointer[colorIndex].Y;
+                            float colorMappedToDepthX = colorMappedToDepthPoint[colorIndex].X;
+                            float colorMappedToDepthY = colorMappedToDepthPoint[colorIndex].Y;
 
                             // The sentinel value is -inf, -inf, meaning that no depth pixel corresponds to this color pixel.
                             if (!float.IsNegativeInfinity(colorMappedToDepthX) &&
@@ -255,7 +253,31 @@ namespace GTI780_TP1
                     colorFrame.Dispose();
                 }
             }
+
+            insertHeader();
         } //END Reader_FrameArrived()
+
+
+        private void insertHeader()
+        {
+            byte[] bytes = hex.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                string binary = Convert.ToString(bytes[i], 2).PadLeft(8, '0');
+                string y;
+                for (int j = 0; j < binary.Length; j++)
+                {
+                    y = binary[(binary.Length - (j + 1))].ToString();
+                    int value = Int32.Parse(y);
+                    int index = 2 * (7 - j) + 16 * i;
+
+                    System.Drawing.Color rgbColor = System.Drawing.Color.FromArgb(0, 0, (byte)(value * 255));
+                    headerBitmap.SetPixel(index, 0, rgbColor);
+                }
+            }
+            headerBitmap.Save(@"C:/Users/ak57370/Desktop/GTI780-KinectLab1/GTI780_TP1/EnTeteModifiee.bmp");
+        }
 
         public ImageSource ImageSource1
         {

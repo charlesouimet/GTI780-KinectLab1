@@ -123,6 +123,7 @@
     <Content Include="Emgu.CV.UI.dll" />
     <Content Include="Emgu.CV.UI.GL.dll" />
     <Content Include="Emgu.CV.World.dll" />
+    <Resource Include="EnTeteModifiee.bmp" />
     <Content Include="msvcp120.dll" />
     <Content Include="msvcr120.dll" />
     <Content Include="opencv_ffmpeg310.dll" />

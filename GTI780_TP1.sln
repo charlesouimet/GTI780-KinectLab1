@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTI780_TP1", "GTI780_TP1\GTI780_TP1.csproj", "{7227D0B0-2628-40D2-89DD-9C1F57E65860}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{370B4183-D736-46D9-999F-6884AD8E96D6}"
+	ProjectSection(SolutionItems) = preProject
+		GTI780_TP1\EnTeteModifiee.bmp = GTI780_TP1\EnTeteModifiee.bmp
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

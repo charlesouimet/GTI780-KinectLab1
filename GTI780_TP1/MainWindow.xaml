@@ -18,7 +18,7 @@
         <Image x:Name="PictureBox2"
                Source="{Binding ImageSource2}"
                 Stretch="None" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Image Name="HeaderImage" Source="EnTeteIncorrect.bmp"
+        <Image Name="HeaderImage" Source="EnTeteModifiee.bmp"
                Stretch="None" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" />
     </Grid>
 </Window>
