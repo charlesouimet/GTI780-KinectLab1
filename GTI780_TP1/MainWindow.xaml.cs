@@ -264,7 +264,7 @@ namespace GTI780_TP1
                     headerBitmap.SetPixel(formule,0,RGB);
                 }
             }
-            headerBitmap.Save(@"C:/Users/ak57370/Desktop/GTI780-KinectLab1/GTI780_TP1/EnTeteModifiee.bmp");
+            headerBitmap.Save(@"EnTeteModifiee.bmp");
         }
 
         public ImageSource ImageSource1
