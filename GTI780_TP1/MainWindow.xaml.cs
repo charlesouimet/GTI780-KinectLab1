@@ -33,6 +33,9 @@ namespace GTI780_TP1
         // Number of bytes per pixel for the format used in this project
         private int BYTESPERPIXELS = (PixelFormats.Bgr32.BitsPerPixel + 7) / 8;
 
+        Bitmap headerBitmap = new Bitmap(512, 1);
+        private const string hex = "F1 01 40 80 00 00 C4 2D D3 AF F2 14 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 36 95 82 21";
+
         // Size of the target display screen
         private double screenWidth;
         private double screenHeight;
@@ -62,8 +65,6 @@ namespace GTI780_TP1
 
         private int depthPixelWidth = 0;
         private int depthPixelHeight = 0;
-        Bitmap headerBitmap = new Bitmap(512, 1);
-        private const string hex = "F1 01 40 80 00 00 C4 2D D3 AF F2 14 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 36 95 82 21";
         
 
 
@@ -138,9 +139,7 @@ namespace GTI780_TP1
                 if (depthFrame == null) { return; }
 
                 /**
-                 * 
-                 * ********Depth*********
-                 * 
+                 *Depth
                  **/
 
                 depthPixelHeight = this.depthBitmap.PixelHeight;
