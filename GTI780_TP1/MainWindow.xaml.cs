@@ -62,9 +62,9 @@ namespace GTI780_TP1
 
         private int depthPixelWidth = 0;
         private int depthPixelHeight = 0;
-
-        private const string hex = "F1 01 40 80 00 00 C4 2D D3 AF F2 14 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 36 95 82 21";
         Bitmap headerBitmap = new Bitmap(512, 1);
+        private const string hex = "F1 01 40 80 00 00 C4 2D D3 AF F2 14 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 36 95 82 21";
+        
 
 
         public MainWindow()
@@ -221,35 +221,29 @@ namespace GTI780_TP1
         //Les pointeurs et les mémoires tampons de taille fixe ne peuvent être utilisés que dans un contexte unsafe
         private unsafe void ProcessDepth(int width, int height, ushort[] frameArrayData, byte[] depthPixelArray, ushort depthMinDistance)
         {
-            fixed (DepthSpacePoint* colorMappedToDepthPoint = this.mapColorToDepth)
+            fixed (DepthSpacePoint* colorMappedToDepth = this.mapColorToDepth)
             {
-                // Treat the color data as 4-byte pixels
-                uint* bitmapPixelsPointer = (uint*)this.colorBitmap.BackBuffer;
-
-                for (int colorIndex = 0; colorIndex < this.mapColorToDepth.Length; ++colorIndex)
+                uint* _bitmapPixels = (uint*)this.colorBitmap.BackBuffer;
+                for (int color = 0; color < this.mapColorToDepth.Length; ++color)
                 {
-                    float colorMappedToDepthX = colorMappedToDepthPoint[colorIndex].X;
-                    float colorMappedToDepthY = colorMappedToDepthPoint[colorIndex].Y;
+                    float colorDepthX = colorMappedToDepth[color].X;
+                    float colorDepthY = colorMappedToDepth[color].Y;
 
-                    // The sentinel value is -inf, -inf, meaning that no depth pixel corresponds to this color pixel.
-                    if (!float.IsNegativeInfinity(colorMappedToDepthX) &&
-                        !float.IsNegativeInfinity(colorMappedToDepthY))
+                    if (!float.IsNegativeInfinity(colorDepthX) && !float.IsNegativeInfinity(colorDepthY))
                     {
-                        // Make sure the depth pixel maps to valid point in color space
-                        int depthX = (int)(colorMappedToDepthX + 0.5f);
-                        int depthY = (int)(colorMappedToDepthY + 0.5f);
-
-  
-                        if ((depthX >= 0) && (depthX < width) && (depthY >= 0) && (depthY < height))
+                        int depthX = (int)(colorDepthX + 0.5f);
+                        int depthY = (int)(colorDepthY + 0.5f);
+                        
+                        if ((depthX>=0)&&(depthX<width)&&(depthY >= 0)&&(depthY<height))
                         {
                             int depthIndex = (depthY * width) + depthX;
                             ushort depth = frameArrayData[depthIndex];
-                            depthPixelArray[colorIndex] = (byte)(depth >= depthMinDistance && depth <= ushort.MaxValue ? (depth / depthToBytes) : 0);
+                            depthPixelArray[color] = (byte)(depth >= depthMinDistance && depth <= ushort.MaxValue ? (depth / depthToBytes) : 0);
                         }
                     }
                 }
                 //this.AddHeader(this.colorBitmap);
-                this.depthBitmap.WritePixels(new Int32Rect(0, 0, depthPixelWidth, depthPixelHeight), depthPixelArray, depthPixelWidth, 0);
+                this.depthBitmap.WritePixels(new Int32Rect(0, 0, depthPixelWidth, depthPixelHeight), depthPixelArray, depthBitmap.PixelWidth, 0);
             }
         }
 
@@ -257,20 +251,18 @@ namespace GTI780_TP1
 
         private void AddEntete()
         {
-            byte[] bytes = hex.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
-
-            for (int i = 0; i < bytes.Length; i++)
+            byte[] octets = hex.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
+            for (int i=0;i<octets.Length;i++)
             {
-                string binary = Convert.ToString(bytes[i], 2).PadLeft(8, '0');
-                string y;
-                for (int j = 0; j < binary.Length; j++)
+                string binaire = Convert.ToString(octets[i],2).PadLeft(8,'0');
+                string temp;
+                for (int j=0;j<binaire.Length;j++)
                 {
-                    y = binary[(binary.Length - (j + 1))].ToString();
-                    int value = Int32.Parse(y);
-                    int index = 2 * (7 - j) + 16 * i;
-
-                    System.Drawing.Color rgbColor = System.Drawing.Color.FromArgb(0, 0, (byte)(value * 255));
-                    headerBitmap.SetPixel(index, 0, rgbColor);
+                    temp = binaire[(binaire.Length-(j+1))].ToString();
+                    int value = Int32.Parse(temp);
+                    int formule = 2 * (7 - j) + 16 * i;
+                    System.Drawing.Color RGB = System.Drawing.Color.FromArgb(0,0,(byte)(value*255));
+                    headerBitmap.SetPixel(formule,0,RGB);
                 }
             }
             headerBitmap.Save(@"C:/Users/ak57370/Desktop/GTI780-KinectLab1/GTI780_TP1/EnTeteModifiee.bmp");

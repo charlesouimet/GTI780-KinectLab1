@@ -226,3 +226,4 @@ C:\Users\ak57370\Desktop\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.Prope
 C:\Users\ak57370\Desktop\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.csproj.GenerateResource.Cache
 C:\Users\ak57370\Desktop\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.exe
 C:\Users\ak57370\Desktop\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.pdb
+C:\Users\ak57370\Desktop\GTI780-KinectLab1\GTI780_TP1\obj\Debug\GTI780_TP1.csprojResolveAssemblyReference.cache
